@@ -25,6 +25,20 @@
 		"format:fix": "prettier . --write",
 		"lint": "eslint ."
 	},
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js"
+		},
+		"./parser": {
+			"types": "./dist/parser.d.ts",
+			"default": "./dist/parser.js"
+		},
+		"./driver": {
+			"types": "./dist/driver.d.ts",
+			"default": "./dist/driver.js"
+		}
+	},
 	"dependencies": {
 		"ahrs": "^1.3.3",
 		"node-hid": "^3.2.0",

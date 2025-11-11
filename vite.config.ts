@@ -28,6 +28,7 @@ export default defineConfig({
 		outDir: "dist",
 		lib: {
 			entry: {
+				index: "./src/index",
 				main: "./src/main",
 				driver: "./src/driver",
 				parser: "./src/parser",

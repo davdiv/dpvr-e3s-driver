@@ -81,3 +81,21 @@ eventSource.onmessage = function (event) {
 
 // use the position as you wish in your application
 ```
+
+### API
+
+dpvr-e3s-driver also exports an API:
+
+```ts
+import { createDriver } from "dpvr-e3s-driver";
+// ...
+const driver = await createDriver();
+try {
+	while (true) {
+		await driver.update();
+		console.log(JSON.stringify(driver.getEulerAngles()));
+	}
+} finally {
+	await driver.close();
+}
+```
