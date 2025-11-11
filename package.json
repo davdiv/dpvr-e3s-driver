@@ -1,6 +1,6 @@
 {
 	"name": "dpvr-e3s-driver",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"description": "A (non-official) driver for the DPVR E3S VR headset.",
 	"keywords": [
 		"DPVR",
