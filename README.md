@@ -1,5 +1,7 @@
 # dpvr-e3s-driver
 
+[![npm](https://img.shields.io/npm/v/dpvr-e3s-driver)](https://www.npmjs.com/package/dpvr-e3s-driver)
+
 A (non-official) driver for the [DPVR E3S VR headset](https://www.dpvr.com/en/product/dpvr-e3s/).
 
 ## Installation
@@ -44,7 +46,7 @@ The console command continuously prints to the console (as a json) the position 
 dpvr-e3s-driver console
 ```
 
-This displays the following output:
+The output on the console is similar to this:
 
 ```
 {"heading":-2.8829463899181356,"pitch":-0.023084540826202843,"roll":1.681257805217968}
