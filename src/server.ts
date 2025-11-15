@@ -6,9 +6,10 @@ export interface ServerConfig {
 	hostname?: string;
 	origin?: string;
 	urlSSE?: string;
+	screenLabel?: string;
 }
 
-export const createServer = ({ port, hostname, origin, urlSSE = "/events" }: ServerConfig = {}) => {
+export const createServer = ({ port, hostname, origin, urlSSE = "/events", screenLabel = "" }: ServerConfig = {}) => {
 	const connections: ServerResponse<IncomingMessage>[] = [];
 	const server = createHttpServer((req, res) => {
 		if (req.url !== urlSSE) {
@@ -21,6 +22,9 @@ export const createServer = ({ port, hostname, origin, urlSSE = "/events" }: Ser
 		res.setHeader("Connection", "keep-alive");
 		if (origin) {
 			res.setHeader("Access-Control-Allow-Origin", origin);
+		}
+		if (screenLabel) {
+			res.write(`data: ${JSON.stringify({ screenLabel })}\n\n`);
 		}
 		connections.push(res);
 		req.on("close", () => {

@@ -23,7 +23,7 @@ program
 
 program
 	.command("console")
-	.description("continuously print to the console (as a json) the position computed from sensor data")
+	.description("continuously print to the console (as a json) the rotation computed from sensor data")
 	.action(async () => {
 		const driver = await createDriver();
 		try {
@@ -39,17 +39,18 @@ program
 program
 	.command("server")
 	.description("start a web server that serves the position computed from sensor data as server-sent events (SSE)")
-	.option("-p, --port <number>", "the port to listen on")
+	.option("-p, --port <number>", "the port to listen on", "4001")
 	.option("-h, --hostname <string>", "the hostname to listen on", "localhost")
 	.option("-o, --origin <string>", "the origin to allow (for CORS request)")
 	.option("-u, --url-sse <string>", "the URL for server-sent events")
-	.action(async ({ port, hostname, origin, urlSSE }) => {
+	.option("-l, --screen-label <string>", "the screen label", "DPVR E3")
+	.action(async ({ port, hostname, origin, urlSSE, screenLabel }) => {
 		const driver = await createDriver();
-		const server = createServer({ port, hostname, origin, urlSSE });
+		const server = createServer({ port, hostname, origin, urlSSE, screenLabel });
 		try {
 			while (true) {
 				await driver.update();
-				server.update(driver.getEulerAngles());
+				server.update({ rotation: driver.getEulerAngles() });
 			}
 		} finally {
 			await driver.close();
