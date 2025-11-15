@@ -67,19 +67,25 @@ The above command starts the web server with default options.
 The command below starts a web server on port 4001, accepting CORS connections from http://localhost:5173 and serving the VR headset position as Server Sent Events (SSE) on the URL http://localhost:4001/vr-position.
 
 ```
-dpvr-e3s-driver server --port 4001 --origin http://localhost:5173 --url-sse /vr-position
+dpvr-e3s-driver server --port 4001 --origin http://localhost:5173 --url-sse /events
 ```
 
 To use the position from a web application, you can use the following typescript code snippet:
 
 ```ts
 let position: null | { heading: number; roll: number; pitch: number } = null;
-const eventSource = new EventSource("http://localhost:4001/vr-position");
+const eventSource = new EventSource("http://localhost:4001/events");
 eventSource.onmessage = function (event) {
 	position = JSON.parse(event.data);
 };
 
 // use the position as you wish in your application
+```
+
+The driver can be used with [this video player](https://davdiv.github.io/stereo-video-player/) by running:
+
+```
+dpvr-e3s-driver server --port 4001 --origin https://davdiv.github.io
 ```
 
 ### API
