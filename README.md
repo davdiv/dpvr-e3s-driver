@@ -76,7 +76,7 @@ To use the position from a web application, you can use the following typescript
 let position: null | { heading: number; roll: number; pitch: number } = null;
 const eventSource = new EventSource("http://localhost:4001/events");
 eventSource.onmessage = function (event) {
-	position = JSON.parse(event.data);
+	position = JSON.parse(event.data).rotation;
 };
 
 // use the position as you wish in your application
